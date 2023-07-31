@@ -1,8 +1,18 @@
 #!/usr/bin/env node
 import yargs from 'yargs';
 
-yargs.scriptName('gen');
-yargs.usage('Usage: $0 <command> [args]');
-yargs.help();
+import { fileCommand } from './commands/file';
 
-const argv = yargs.argv;
+yargs.scriptName('gen')
+  .usage('Usage: $0 <command> [args]')
+  .help()
+  .alias('h', 'help')
+  .alias('v', 'version')
+  .command(fileCommand)
+  .demandCommand()
+
+const main = async () => {
+  const argv = await yargs.argv;
+}
+
+main();

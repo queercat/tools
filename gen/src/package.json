@@ -7,12 +7,14 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
+    "@types/node": "^20.4.5",
     "@types/yargs": "^17.0.24"
   },
   "scripts": {
     "build": "tsc && yarn postbuild",
     "postbuild": "cp package.json ../bin/ && cp yarn.lock ../bin/ && yarn --cwd ../bin/ install --production",
     "watch": "tsc -w",
-    "test": "jest"
+    "test": "node ../bin/gen.js --help",
+    "use": "yarn build && node ../bin/gen.js"
   }
 }
