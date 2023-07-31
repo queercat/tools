@@ -6,5 +6,3 @@ yargs.usage('Usage: $0 <command> [args]');
 yargs.help();
 
 const argv = yargs.argv;
-
-console.log(argv);
