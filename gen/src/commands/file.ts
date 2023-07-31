@@ -22,13 +22,25 @@ export const fileCommand: CommandModule = {
     const template = argv.template as string;
     const _templateService = acquire<TemplateService>("TemplateService");
 
-    const templates = (await _templateService.getTemplates()).filter((t) => t.includes(".template")).map((t) => t.split(".template")[0]);
+    const templates = await _templateService.getTemplatesNames();
 
     if (!templates.includes(template)) {
       console.log(`Template ${template} not found`);
       return;
     }
 
+    const name = argv.name as string ?? await _templateService.getDefaultNameFromTemplate(template);
 
+    console.log(`Generating ${name} from ${template}.template ...`);
+
+    try {
+      await _templateService.generateFileFromTemplate(template, name);
+    } catch (e) {
+      console.log(`Failed to generate ${name} from ${template}.template`);
+      console.error(e);
+      return;
+    }
+
+    console.log(`Generated ${name} from ${template}.template`);
   }
 };
