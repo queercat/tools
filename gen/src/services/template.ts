@@ -34,6 +34,9 @@ export class TemplateService {
     return defaultName;
   }
 
+  /**
+   * Generates a file from a template.
+   */
   public async generateFileFromTemplate(template: string, name: string): Promise<void> {
     const cwd = process.cwd();
     const templates = await this.getTemplates();
