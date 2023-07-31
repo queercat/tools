@@ -1,5 +1,8 @@
 #!/bin/sh
 
+mkdir -p ./bin
+mkdir -p ./winblows
+
 # Build gen.
 cwd=$(pwd)
 cd ../gen/src && yarn build
