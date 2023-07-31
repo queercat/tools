@@ -8,6 +8,3 @@ yargs.help();
 const argv = yargs.argv;
 
 console.log(argv);
-
-// Add testing package with yarn.
-// yarn add -D jest ts-jest @types/jest
