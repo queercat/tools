@@ -14,7 +14,7 @@ export class TemplateService {
       return this.templates;
     }
 
-    this.templates = await fs.promises.readdir("./templates");
+    this.templates = await fs.promises.readdir(this.getTemplateDirectory());
     return this.templates;
   }
 
@@ -40,7 +40,7 @@ export class TemplateService {
   public async generateFileFromTemplate(template: string, name: string): Promise<void> {
     const cwd = process.cwd();
     const templates = await this.getTemplates();
-    const templatePath = `${__dirname.split("\\").slice(0, -1).join("\\")}\\templates\\${templates.filter((t) => t.includes(template))[0]}`;
+    const templatePath = `${this.getTemplateDirectory()}${templates.filter((t) => t.includes(template))[0]}`;
 
     const templateData = fs.readFileSync(templatePath, "utf-8");
 
@@ -49,5 +49,9 @@ export class TemplateService {
         throw err;
       }
     })
+  }
+
+  private getTemplateDirectory(): string {
+    return `${__dirname.split("\\").slice(0, -1).join("\\")}\\templates\\`
   }
 }
